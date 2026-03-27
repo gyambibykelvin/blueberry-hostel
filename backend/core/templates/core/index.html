@@ -1,0 +1,220 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Developer - Kelvin Anane Gyambiby" />
+    <link rel="icon" href="{% static 'core/img/blueberry_logo.png' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'core/style.css' %}" />
+    <title>BlueBerry Hostel</title>
+  </head>
+  <body>
+    <!-- Header section -->
+    <header>
+      <div class="hero">
+        <img
+          src="{% static 'core/img/blueberry_logo.jpg' %}"
+          alt="BlueBerry Hostel Logo"
+          class="logo"
+        />
+        <p>BlueBerry</p>
+      </div>
+
+      <nav class="nav-links">
+        <ul>
+          <li>Get Help</li>
+          <li><a href="{% url 'login' %}">Login</a></li>
+          <li><a href="{% url 'signup' %}">Sign up</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Image slider section -->
+    <section class="image-slide-section">
+      <div class="slider">
+        <div class="slides">
+          <div class="slide">
+            <img src="{% static 'core/img/two_beds.jpg' %}" alt="slide 1" />
+            <div class="overlay">
+              <h1>Comfortable Living Spaces</h1>
+              <p>Designed for student comfort and focus</p>
+              <button>View Rooms</button>
+            </div>
+          </div>
+
+          <div class="slide">
+            <img src="{% static 'core/img/nice_view.jpg' %}" alt="slide 2" />
+            <div class="overlay">
+              <h1>Beautiful Environment</h1>
+              <p>Enjoy a peaceful and inspiring view</p>
+              <button>Explore</button>
+            </div>
+          </div>
+
+          <div class="slide">
+            <img src="{% static 'core/img/double_bed.jpg' %}" alt="slide 3" />
+            <div class="overlay">
+              <h1>Modern Facilities</h1>
+              <p>Everything you need in one place</p>
+              <button>See More</button>
+            </div>
+          </div>
+        </div>
+        <div class="dots">
+          <span class="dot active" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+          <span class="dot" data-index="2"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Facilities section -->
+    <section class="facilities-section">
+      <h2>Facilities</h2>
+      <div class="facilities-container">
+        <div class="facility-card">
+          <i class="fa-solid fa-coffee"></i>
+          <p>Cafeteria</p>
+        </div>
+        <div class="facility-card">
+          <i class="fa-solid fa-kitchen-set"></i>
+          <p>Kitchen</p>
+        </div>
+        <div class="facility-card">
+          <i class="fa-solid fa-lock"></i>
+          <p>Locker</p>
+        </div>
+        <div class="facility-card">
+          <i class="fa-solid fa-book-reader"></i>
+          <p>Study Room</p>
+        </div>
+        <div class="facility-card">
+          <i class="fa-solid fa-film"></i>
+          <p>Cinema</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial section -->
+    <section class="testimonial-section">
+      <h2>Testimonials</h2>
+      <div class="testimonial-container">
+        <div class="testimonial-card">
+          <img src="{% static 'core/img/image1.png' %}" alt="Testimony 1" />
+          <h3>John Smith</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
+            aliquid nihil,<br />
+          </p>
+          <i class="fa-solid fa-star" style="color: gold"></i>
+          <i class="fa-solid fa-star" style="color: gold"></i>
+          <i class="fa-solid fa-star" style="color: gold"></i>
+          <i class="fa-solid fa-star" style="color: gold"></i>
+        </div>
+        <div class="testimonial-card">
+          <img src="{% static 'core/img/image2.png' %}" alt="Testimony 2" />
+          <h3>John Smith</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
+            aliquid nihil,<br />
+          </p>
+          <i class="fa-solid fa-star" style="color: gold"></i>
+          <i class="fa-solid fa-star" style="color: gold"></i>
+          <i class="fa-solid fa-star" style="color: gold"></i>
+          <i class="fa-solid fa-star-half-stroke"></i>
+        </div>
+        <div class="testimonial-card">
+          <img src="{% static 'core/img/image3.png' %}" alt="Testimony 1" />
+          <h3>John Smith</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
+            aliquid nihil,<br />
+          </p>
+
+          <i class="fa-solid fa-star" style="color: gold"></i>
+          <i class="fa-solid fa-star" style="color: gold"></i>
+          <i class="fa-solid fa-star" style="color: gold"></i>
+          <i class="fa-solid fa-star"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="social-media-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+
+      &copy; {{ datetime }} BlueBerry Hostel. All rights reserved.
+
+      <div class="sponsor">Best Brain College</div>
+    </footer>
+
+    <!-- Javascript -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const slides = document.querySelector(".slides");
+        const slidesItems = document.querySelectorAll(".slide");
+        const slider = document.querySelector(".slider");
+        const dots = document.querySelectorAll(".dot");
+
+        let index = 0;
+        let intervalTime = 3000;
+        let interval;
+
+        // Function to move to a specific slide
+        function goToSlide(i) {
+          index = i;
+          const width = slider.clientWidth;
+          slides.style.transform = `translateX(-${index * width}px)`;
+          updateDots();
+        }
+
+        // Update dots active state
+        function updateDots() {
+          dots.forEach((dot) => dot.classList.remove("active"));
+          dots[index].classList.add("active");
+        }
+
+        // Move to next slide
+        function nextSlide() {
+          index++;
+          if (index >= slidesItems.length) index = 0;
+          goToSlide(index);
+        }
+
+        // Start the automatic slider
+        function startSlider() {
+          interval = setInterval(nextSlide, intervalTime);
+        }
+
+        // Stop the automatic slider
+        function stopSlider() {
+          clearInterval(interval);
+        }
+
+        // Dots clickable
+        dots.forEach((dot) => {
+          dot.addEventListener("click", () => {
+            goToSlide(Number(dot.dataset.index));
+          });
+        });
+
+        // Pause on hover
+        slider.addEventListener("mouseenter", stopSlider);
+        slider.addEventListener("mouseleave", startSlider);
+
+        // Initialize
+        goToSlide(0);
+        startSlider();
+      });
+    </script>
+  </body>
+</html>

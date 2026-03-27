@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/* General Styles */
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: var(--background-color);
+    font-family: "Lora", sans-serif;
+}
+
+/* CSS Variables */
+:root{
+    --primary-color: #1E3A8A;
+    --secondary-color: #2563EB;
+    --background-color: #F3F4F6;
+    --text-color: #111827;
+    --header-text-color: #F9FAFB;
+}
+
+.login-container{
+   display: grid;
+   grid-template-columns: 1fr 50%;
+}
+
+.right-side{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.right-side h2{
+    color: var(--primary-color);
+    font-size: 2rem;
+}
+
+.right-side form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 20px;
+}
+
+.right-side form input, .alternate-login button{
+    padding: 10px;
+}
+
+.alternate-login button{
+    background: transparent;
+    border-color: rgba(185, 185, 185, 0.404);
+    cursor: pointer;
+}
+
+
+.right-side form input:focus{
+    outline: none;
+    border: 2px solid var(--primary-color);
+}
+
+
+.right-side form button{
+    padding: 10px;
+    background: var(--primary-color);
+    color: var(--header-text-color);
+    border: none;
+    cursor: pointer;
+}
+
+.right-side form button:hover{
+    background: var(--secondary-color);
+}
+
+
+.alternate-login{
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    width: 55%;
+    justify-content: space-between;
+}
+
+.right-side p{
+    font-size: 12px;
+}
+
+.right-side .divider{
+    margin-top: 20px;
+    display: flex;
+    opacity: 0.2;
+    align-items: center;
+    gap: 5px;
+}
+
+.divider .first-line, .divider .second-line{
+    border: 1px solid rgb(26, 26, 26);
+    width: 150px;
+    height: 1px;
+}
+
+.left-side img{
+    width: 100%;
+    height: 100dvh;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.fa-google {
+  background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+i{
+    font-size: 1.2rem;
+}
+
+.right-side form button i{
+    margin-right: 5px;
+    font-size: 1rem;
+}
+
+/* Responsive */
+
+@media (max-width: 730px) {
+    .login-container{
+        grid-template-columns: 1fr;
+        width: 100%;
+        height: 100%;
+        margin-top: 100px;
+    }
+    .left-side img{
+        width: 300px;
+        height: 200px;
+        border-radius: 10px;
+    }
+    .left-side{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .alternate-login button{
+        max-width: 500px;
+        min-width: 200px;
+    }
+}

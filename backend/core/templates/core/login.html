@@ -1,0 +1,59 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Developer - Kelvin Anane Gyambiby" />
+    <link rel="icon" href="{% static 'core/img/blueberry_logo.png' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'core/login.css' %}" />
+    <title>BlueBerry Hostel | Login</title>
+  </head>
+  <body>
+    <section class="login-section">
+      <div class="login-container">
+        <div class="left-side">
+          <img src="{% static 'core/img/Bunk Bed.jpg'%}" alt="Bunk Bed" />
+        </div>
+
+        <div class="right-side">
+          <h2>Welcome Back</h2>
+          <p>Login to your account</p>
+
+          <div class="alternate-login">
+            <button><i class="fab fa-google"></i> Login with Google</button>
+            <button>
+              <i class="fab fa-facebook" style="color: #1877f2"></i> Login with
+              Facebook
+            </button>
+          </div>
+
+          <div class="divider">
+            <span class="first-line"></span>
+            <span class="or">or</span>
+            <span class="second-line"></span>
+          </div>
+
+          <form method="POST" action="">
+            {% csrf_token %}
+            <label for="usernamee">Username</label>
+            <input type="text" id="usernamee" name="username" required />
+            <label for="usernamee">Password</label>
+            <input type="password" id="usernamee" name="password" required />
+            <button type="submit">
+              <i class="fa-solid fa-sign-in"></i>Login
+            </button>
+          </form>
+
+          <p class="signup-link">
+            Don't have an account? <a href="{% url 'signup' %}">Sign up</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

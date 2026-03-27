@@ -1,0 +1,86 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'core/login.css' %}" />
+    <title>BlueBerry Hostel | Sign up</title>
+  </head>
+  <body>
+    <section class="login-section">
+      <div class="login-container">
+        <div class="left-side">
+          <img src="{% static 'core/img/Bunk Bed.jpg'%}" alt="Bunk Bed" />
+        </div>
+
+        <div class="right-side">
+          <h2>Signup</h2>
+          <p>Signup to access the dashboard</p>
+
+          <!--  <div class="alternate-login">
+            <button><i class="fab fa-google"></i> Login with Google</button>
+            <button>
+              <i class="fab fa-facebook" style="color: #1877f2"></i> Login with
+              Facebook
+            </button>
+          </div>
+
+          <div class="divider">
+            <span class="first-line"></span>
+            <span class="or">or</span>
+            <span class="second-line"></span>
+          </div> -->
+
+          <form method="POST" action="">
+            {% csrf_token %}
+            <label for="usernamee">Username</label>
+            <input type="text" id="username" name="username" required />
+
+            <label for="password">Password</label>
+            <input type="password" id="username" name="password" required />
+
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" required />
+
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" required />
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+
+            <label for="gender">Gender</label>
+            <input type="radio" id="gender" name="gender" value="male" />
+            <label>Male</label>
+
+            <input type="radio" id="gender" name="gender" value="female" />
+            <label>Female</label>
+
+            <label for="phone_number">Phone Number</label>
+            <input
+              type="number"
+              id="phone_number"
+              name="phone_number"
+              required
+            />
+
+            <!--  <label for="role">Role</label>
+            <select name="role" id="role">
+              <option value="none" name="none">Select your role</option>
+              <option value="user" name="user">User</option>
+              <option value="admin" name="admin">Admin</option>
+            </select> -->
+
+            <button type="submit">
+              <i class="fa-solid fa-sign-in"></i>Signup
+            </button>
+          </form>
+
+          <p class="signup-link">
+            Already have an account? <a href="{% url 'login' %}">Login</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
