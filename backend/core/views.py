@@ -9,8 +9,10 @@ import datetime
 
 # Create your views here.
 
+now = datetime.datetime.now()
+
 def landing_page(request):
-    return render(request, "core/index.html")
+    return render(request, "core/index.html", {'datetime': now.year})
 
 #login view
 def login_view(request):
@@ -72,44 +74,77 @@ def signup_view(request):
 
 #logout view
 def logout_view(request):
-    logout(request, CustomUser)
+    logout(request)
     return redirect('landing_page')
 
+#booking view
 @login_required
-def  Booking_view(request):
+def booking_view(request):
+    user = request.user
+
     if request.method == 'POST':
         room_number = request.POST.get('room_number')
         room = Room.objects.get(room_number=room_number)
-        user = request.user
+
+        # VALIDATION: gender check BEFORE booking
+        if room.gender != user.profile.gender:
+            return render(request, 'core/dashboard.html', {
+                'error': "Room not suitable for your gender"
+            })
+
         Booking.objects.create(
             user=user,
             room=room,
             date_booked=datetime.datetime.now(),
             status='pending'
         )
-        return redirect('dashboard')  # Redirect to dashboard after booking
-    
-    if user.is_authenticated:
-        rooms = Room.objects.all()
-        return render(request, 'core/booking.html', {'rooms': rooms})
-    
-    if room.gender != request.user.gender:
-        reject_message = "Sorry, you cannot book this room as it is not suitable for your gender."
-        return render(request, 'core/booking.html', {'reject_message': reject_message})
 
-    return render(request, 'core/booking.html')   
+        return redirect('dashboard')
+
+    return redirect('dashboard')
 
 
 @login_required
 def dashboard_view(request):
-   """  user = request.user
-    bookings = Booking.objects.filter(user=user)
-    all_bookings = Booking.objects.all()
-    
-    return render(request, 'core/dashboard.html', {'bookings': bookings, 'all_bookings': all_bookings})
- """
-   return HttpResponse("Welcome to the dashboard")
+    user = request.user
 
+    #All user bookings
+    bookings = Booking.objects.filter(user=user).order_by('-date_booked')
+
+    #Recent booking (latest)
+    recent_booking = bookings.first()
+
+    #Filter rooms by gender (CRITICAL UX FIX) #will be right back
+    user_gender = request.user.profile.gender
+    rooms = Room.objects.filter(gender=user_gender)
+
+
+    """  user_gender = user.profile.gender
+    rooms = Room.objects.filter(gender=user_gender) """
+
+    #Stats
+    total_bookings = bookings.count()
+    pending = bookings.filter(status='pending').count()
+    approved = bookings.filter(status='approved').count()
+    rejected = bookings.filter(status='rejected').count()
+    available_rooms = rooms.count()
+
+    context = {
+        'bookings': bookings,
+        'recent_booking': recent_booking,
+        'rooms': rooms,
+        'total_bookings': total_bookings,
+        'pending': pending,
+        'approved': approved,
+        'rejected': rejected,
+        'available_rooms': available_rooms,
+        'datetime': now.year
+    }
+
+    return render(request, 'core/dashboard.html', context)
+
+
+#cancel booking logic
 @login_required
 def cancel_booking_view(request, booking_id):
     booking = Booking.objects.get(id=booking_id)

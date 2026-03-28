@@ -1,0 +1,140 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlueBerry Hostel | Dashboard</title>
+    <link rel="stylesheet" href="{% static 'core/dashboard.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="hero">
+        <img
+          src="{% static 'core/img/blueberry_logo.jpg' %}"
+          alt="BlueBerry Hostel Logo"
+          class="logo"
+        />
+        <p>BlueBerry</p>
+      </div>
+
+      <div class="navbar">
+        Welcome {{ request.user.first_name }}
+        <div class="logout">
+          <i class="fa-solid fa-sign-out"></i>
+          <a href="{% url 'logout' %}">Logout</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Card container -->
+    <section class="card-container">
+      <div class="cards">
+        <div class="card">
+          <h3>Available Room</h3>
+          <p>{{ available_rooms }}</p>
+        </div>
+        <div class="card">
+          <h3>Total Bookings</h3>
+          <p>{{ total_bookings }}</p>
+        </div>
+        <div class="card">
+          <h3>Pending</h3>
+          <p>{{ pending }}</p>
+        </div>
+        <div class="card">
+          <h3>Approved</h3>
+          <p>{{ approved }}</p>
+        </div>
+        <div class="card">
+          <h3>Rejected</h3>
+          <p>{{ rejected }}</p>
+        </div>
+      </div>
+    </section>
+
+      <!-- RECENT BOOKING -->
+      <div class="recent-section">
+        <h3>Recent Booking</h3>
+
+        {% if recent_booking %}
+        <p>Room: {{ recent_booking.room.room_number }}</p>
+        <p>Status: {{ recent_booking.status }}</p>
+        {% else %}
+        <p>No recent booking</p>
+        {% endif %}
+      </div>
+
+      <!-- AVAILABLE ROOMS -->
+      <div class="available-section">
+        <h3>Available Rooms</h3>
+        <table>
+          <tr>
+            <th>Room</th>
+            <th>Action</th>
+          </tr>
+
+          {% for room in rooms %}
+          <tr>
+            <td>{{ room.room_number }}</td>
+            <td>
+              <form method="POST" action="{% url 'booking' %}">
+                {% csrf_token %}
+                <input
+                  type="hidden"
+                  name="room_number"
+                  value="{{ room.room_number }}"
+                />
+                <button class="btn">Book</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+
+      <!-- BOOKING HISTORY -->
+      <div class="booking-section">
+        <h3>Booking History</h3>
+        <table>
+          <tr>
+            <th>Room</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+
+          {% for booking in bookings %}
+          <tr>
+            <td>{{ booking.room.room_number }}</td>
+            <td class="status-{{ booking.status }}">{{ booking.status }}</td>
+            <td>
+              {% if booking.status == 'pending' %}
+              <a href="{% url 'cancel_booking' booking.id %}">
+                <button class="btn">Cancel</button>
+              </a>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+
+  <!-- Footer -->
+      <footer>
+      <div class="social-media-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+
+      &copy; {{ datetime }} BlueBerry Hostel
+
+      <div class="sponsor">Best Brain College</div>
+    </footer>
+  </body>
+</html>

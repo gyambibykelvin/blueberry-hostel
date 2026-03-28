@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+ body {
+        font-family: Arial;
+        background: var(--background-color);
+        margin: 0;
+      }
+
+
+:root{
+    --primary-color: #1E3A8A;
+    --secondary-color: #2563EB;
+    --background-color: #F3F4F6;
+    --text-color: #111827;
+    --header-text-color: #F9FAFB;
+    --pending-status: orange;
+    --approved-status: green;
+    --rejected-status: red;
+}
+
+body{
+    background: var(--background-color);
+    font-family: "Lora", sans-serif;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: var(--header-text-color);
+    border-bottom: 1px solid white;
+
+}
+
+header .hero{
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.hero p{
+    align-self: center;
+}
+
+.hero img{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+
+
+
+.navbar{
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar .logout a{
+    color: red;
+    text-decoration: none;
+    margin-right: 20px;
+
+}
+.navbar .logout i{
+    color: red;
+}
+
+
+.card-container{
+    padding: 20px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    flex: 1;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.card:hover{
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-5px);
+}
+
+.recent-section, .available-section, .booking-section {
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+table {
+    width: 100%;
+    background: white;
+    border-collapse: collapse;
+}
+
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.btn {
+    background: #f97316;
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.status-pending {
+    color: var(--pending-status);
+}
+
+.status-approved {
+    color: var(--approved-status);
+}
+
+.status-rejected {
+    color: var(--rejected-status);
+}
+
+/* Footer */
+footer{
+    background: var(--primary-color);
+    color: var(--header-text-color);
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+footer .social-media-links a{
+    color: var(--header-text-color);
+    margin: 0 10px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer .social-media-links a:hover{
+    color: var(--secondary-color);
+}
