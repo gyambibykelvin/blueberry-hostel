@@ -119,3 +119,6 @@ STATIC_URL = 'static/'
 
 #using the custom model
 AUTH_USER_MODEL = 'core.CustomUser'
+
+#redirect back when user escape the normal flow
+login_URL = 'login'

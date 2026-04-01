@@ -4,6 +4,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+html{
+    scroll-behavior: smooth;
+}
+
 /* Colors root */
 :root{
     --primary-color: #1E3A8A;
@@ -101,6 +105,24 @@ ul a:hover{
   flex-shrink: 0;
 }
 
+.overlay a{
+    padding: 10px;
+    background: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    margin-top: 40px;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    width: fit-content;
+}
+
+.overlay a:hover{
+    background: var(--secondary-color);
+    transform: scale(1.05);
+    transition: 0.2s ease;
+}
+
 .overlay {
   position: absolute;
   inset: 0;
@@ -114,16 +136,6 @@ ul a:hover{
   background: rgba(0, 0, 0, 0.4);
 }
 
-.overlay button {
-  background: #2563EB;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-    border-radius: 5px;
-    margin-top: 40px;
-    width: fit-content;
-}
 
 .slider::after {
   content: "";
@@ -132,10 +144,38 @@ ul a:hover{
   background: rgba(0,0,0,0.3);
 }
 
+/* How it works */
+.steps{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 60px;
+}
+
+.step{
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.how-it-works h2{
+    text-align: center;
+    margin-top: 70px;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.step i{
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+
 /* Facilities  */
 .facilities-section h2{
     text-align: center;
-    margin-top: 20px;
+    margin-top: 40px;
     font-size: 2rem;
 }
 
@@ -144,17 +184,18 @@ ul a:hover{
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     padding: 20px ;
+    margin-bottom: 40px;
 }
 
-.facility-card{
+.facility-card, .step{
     background: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.facility-card:hover, .testimonial-card:hover{
+.facility-card:hover, .testimonial-card:hover, .step:hover{
     transform: translateY(-5px);
     transition: all 0.3s ease-in-out;
 }
@@ -247,17 +288,63 @@ footer .social-media-links a:hover{
   background: #111827; /* dark */
 }
 
-.call-to-action-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    line-height: 1.6;
+/* FAQ */
+.faq-section {
+  padding: 40px;
+  text-align: center;
+}
+
+.faq-container {
+  max-width: 700px;
+  margin: auto;
+}
+
+.faq-item {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 15px;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.faq-answer {
+  display: none;
+  padding: 10px;
+  text-align: left;
+}
+
+.faq-answer.open {
+  display: block;
+}
+
+/* Call to action section */
+.call-to-action-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.call-to-action-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: fit-content;
+  flex-direction: column;
+  line-height: 1.6;
+}
+
+.call-to-action-container h3{
+    text-align: center;
 }
 
 .cta-btn{
@@ -267,27 +354,43 @@ footer .social-media-links a:hover{
     border-radius: 5px;
     margin-top: 10px;
     cursor: pointer;
+    color: white;
+    text-decoration: none;
 }
 
-.cta-btn a{
-    text-decoration: none;
-    color: white;
+.cta-btn:hover{
+    background: var(--secondary-color);
+    transform: scale(1.05);
+    transition: 0.2s ease;
 }
+
 
 .newsletter-container{
     display: flex;
     padding: 10px;
     margin-top: 10px;
     align-items: center;
+    justify-content: space-between;
+}
+
+.newsletter-info{
+    margin-left: 10px;
 }
 
 .newsletter-container button{
-    padding: 5px;
+    padding: 7px;
     border: none;
     border-radius: 5px;
     background: var(--primary-color);
     color: white;
     cursor: pointer;
+    margin-right: 10px;
+}
+
+.newsletter-container button:hover{
+    background: var(--secondary-color);
+    transform: scale(1.05);
+  transition: 0.2s ease;
 }
 
 .newsletter-container input{
@@ -296,6 +399,46 @@ footer .social-media-links a:hover{
     border-radius: 5px;
     outline: none;
 }
+
+/* popup message */
+.popup{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 18px;
+    border-radius: 5px;
+    color: white;
+    margin-bottom: 10px;
+    z-index: 1000;
+    animation: fadeIn 0.5s ease;
+}
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.popup.info{
+    background-color: red;
+}
+
+/* Reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 
 /* Responsive */
@@ -307,6 +450,11 @@ footer .social-media-links a:hover{
 
     .testimonial-container{
         grid-template-columns: 1fr;
+    }
+    .steps{
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
     }
 }
 
@@ -329,7 +477,7 @@ footer .social-media-links a:hover{
     }
 
     ul a{
-        background: #2563EB;
+        
         color: white;.
         border: none;
         outline: none;
@@ -342,6 +490,13 @@ footer .social-media-links a:hover{
         flex-direction: column;
         font-size: 12px;
         gap: 10px;
-        background: #2563EB;
+        
+    }
+
+    .newsletter-container{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
     }
 }

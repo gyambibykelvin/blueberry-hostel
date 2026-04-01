@@ -11,10 +11,15 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     />
     <link rel="stylesheet" href="{% static 'core/login.css' %}" />
-    <title>BlueBerry Hostel | Login</title>
+    <title>BlueBerry Hostel - Login</title>
   </head>
   <body>
-    <section class="login-section">
+    <!-- sigup success feedback and login error -->
+    {% for message in messages %} {% if message %}
+    <div class="popup {{ message.tags }}">{{ message }}</div>
+    {% endif %} {% endfor %}
+
+    <section class="login-section reveal">
       <div class="login-container">
         <div class="left-side">
           <img src="{% static 'core/img/Bunk Bed.jpg'%}" alt="Bunk Bed" />
@@ -41,19 +46,48 @@
           <form method="POST" action="">
             {% csrf_token %}
             <label for="usernamee">Username</label>
-            <input type="text" id="usernamee" name="username" required />
+            <input type="text" id="username" name="username" required />
             <label for="usernamee">Password</label>
-            <input type="password" id="usernamee" name="password" required />
+            <input type="password" id="username" name="password" required />
             <button type="submit">
               <i class="fa-solid fa-sign-in"></i>Login
             </button>
           </form>
 
-          <p class="signup-link">
-            Don't have an account? <a href="{% url 'signup' %}">Sign up</a>
-          </p>
+          <div class="signup-link">
+            <p>
+              Don't have an account? <a href="{% url 'signup' %}">Sign up</a>
+            </p>
+          </div>
         </div>
       </div>
     </section>
+    <!-- Javascripts -->
+    <script>
+      //Pop feedback
+      setTimeout(() => {
+        document.querySelectorAll(".popup").forEach((el) => {
+          el.style.display = "none";
+        });
+      }, 3000);
+
+      // Reveal
+      const reveals = document.querySelectorAll(".reveal");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+            }
+          });
+        },
+        {
+          threshold: 0.2,
+        },
+      );
+
+      reveals.forEach((el) => observer.observe(el));
+    </script>
   </body>
 </html>

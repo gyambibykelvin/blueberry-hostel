@@ -4,11 +4,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Developer - Kelvin Anane Gyambiby" />
     <link rel="stylesheet" href="{% static 'core/login.css' %}" />
+    <link rel="stylesheet" href="{% static 'core/signup.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
     <title>BlueBerry Hostel | Sign up</title>
   </head>
   <body>
-    <section class="login-section">
+    <section class="login-section reveal">
       <div class="login-container">
         <div class="left-side">
           <img src="{% static 'core/img/Bunk Bed.jpg'%}" alt="Bunk Bed" />
@@ -16,7 +22,6 @@
 
         <div class="right-side">
           <h2>Signup</h2>
-          <p>Signup to access the dashboard</p>
 
           <!--  <div class="alternate-login">
             <button><i class="fab fa-google"></i> Login with Google</button>
@@ -49,12 +54,21 @@
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required />
 
-            <label for="gender">Gender</label>
-            <input type="radio" id="gender" name="gender" value="male" />
-            <label>Male</label>
+            <div class="gender-section">
+              <label for="gender">Gender</label><br />
 
-            <input type="radio" id="gender" name="gender" value="female" />
-            <label>Female</label>
+              <input
+                type="radio"
+                id="gender"
+                name="gender"
+                value="male"
+                style="margin-bottom: 20px; margin-top: 10px"
+              />
+              <label for="male">Male</label><br />
+
+              <input type="radio" id="gender" name="gender" value="female" />
+              <label for="female">Female</label>
+            </div>
 
             <label for="phone_number">Phone Number</label>
             <input
@@ -72,15 +86,39 @@
             </select> -->
 
             <button type="submit">
-              <i class="fa-solid fa-sign-in"></i>Signup
+              <i class="fa-solid fa-user-plus"></i>Signup
             </button>
           </form>
 
-          <p class="signup-link">
-            Already have an account? <a href="{% url 'login' %}">Login</a>
-          </p>
+          <div class="signup-link">
+            <p>
+              Already have an account? <a href="{% url 'login' %}">Login</a>
+            </p>
+          </div>
         </div>
       </div>
     </section>
+    <!-- Javascripts -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Reveal
+        const reveals = document.querySelectorAll(".reveal");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+              }
+            });
+          },
+          {
+            threshold: 0.2,
+          },
+        );
+
+        reveals.forEach((el) => observer.observe(el));
+      });
+    </script>
   </body>
 </html>

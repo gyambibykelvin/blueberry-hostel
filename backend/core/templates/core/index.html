@@ -14,6 +14,11 @@
     <title>BlueBerry Hostel</title>
   </head>
   <body>
+    <!-- logout feedback -->
+    {% for message in messages %} {% if message %}
+    <div class="popup {{ message.tags }}">{{ message }}</div>
+    {% endif %} {% endfor %}
+
     <!-- Header section -->
     <header>
       <div class="hero">
@@ -27,7 +32,7 @@
 
       <nav class="nav-links">
         <ul>
-          <li>Get Help</li>
+          <li><a href="#faq">Get Help</a></li>
           <li><a href="{% url 'login' %}">Login</a></li>
           <li><a href="{% url 'signup' %}">Sign up</a></li>
         </ul>
@@ -35,15 +40,15 @@
     </header>
 
     <!-- Image slider section -->
-    <section class="image-slide-section">
+    <section class="image-slide-section reveal">
       <div class="slider">
         <div class="slides">
           <div class="slide">
             <img src="{% static 'core/img/two_beds.jpg' %}" alt="slide 1" />
             <div class="overlay">
-              <h1>Comfortable Living Spaces</h1>
-              <p>Designed for student comfort and focus</p>
-              <button>View Rooms</button>
+              <h1>Find and Book Your Hostel Room in Minutes</h1>
+              <p>No stress. No confusion. Just simple booking.</p>
+              <a href="{% url 'signup' %}">View Rooms</a>
             </div>
           </div>
 
@@ -52,7 +57,7 @@
             <div class="overlay">
               <h1>Beautiful Environment</h1>
               <p>Enjoy a peaceful and inspiring view</p>
-              <button>Explore</button>
+              <a href="{% url 'signup' %}">Explore</a>
             </div>
           </div>
 
@@ -61,7 +66,7 @@
             <div class="overlay">
               <h1>Modern Facilities</h1>
               <p>Everything you need in one place</p>
-              <button>See More</button>
+              <a href="{% url 'signup' %}">See More</a>
             </div>
           </div>
         </div>
@@ -73,27 +78,52 @@
       </div>
     </section>
 
+    <!-- How it works -->
+    <section class="how-it-works reveal">
+      <h2>How It Works</h2>
+
+      <div class="steps">
+        <div class="step">
+          <i class="fa-solid fa-user-plus"></i>
+          <h3>Create Account</h3>
+          <p>Sign up in seconds</p>
+        </div>
+
+        <div class="step">
+          <i class="fa-solid fa-bed"></i>
+          <h3>Choose Room</h3>
+          <p>Select available rooms</p>
+        </div>
+
+        <div class="step">
+          <i class="fa-solid fa-check-circle"></i>
+          <h3>Get Approved</h3>
+          <p>Wait for admin confirmation</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Facilities section -->
-    <section class="facilities-section">
+    <section class="facilities-section reveal">
       <h2>Facilities</h2>
       <div class="facilities-container">
-        <div class="facility-card">
+        <div class="facility-card reveal">
           <i class="fa-solid fa-coffee"></i>
           <p>Cafeteria</p>
         </div>
-        <div class="facility-card">
+        <div class="facility-card reveal">
           <i class="fa-solid fa-kitchen-set"></i>
           <p>Kitchen</p>
         </div>
-        <div class="facility-card">
+        <div class="facility-card reveal">
           <i class="fa-solid fa-lock"></i>
           <p>Locker</p>
         </div>
-        <div class="facility-card">
+        <div class="facility-card reveal">
           <i class="fa-solid fa-book-reader"></i>
           <p>Study Room</p>
         </div>
-        <div class="facility-card">
+        <div class="facility-card reveal">
           <i class="fa-solid fa-film"></i>
           <p>Cinema</p>
         </div>
@@ -101,10 +131,10 @@
     </section>
 
     <!-- Testimonial section -->
-    <section class="testimonial-section">
+    <section class="testimonial-section reveal">
       <h2>Testimonials</h2>
       <div class="testimonial-container">
-        <div class="testimonial-card">
+        <div class="testimonial-card reveal">
           <img src="{% static 'core/img/image1.png' %}" alt="Testimony 1" />
           <h3>John Smith</h3>
           <p>
@@ -116,7 +146,7 @@
           <i class="fa-solid fa-star" style="color: gold"></i>
           <i class="fa-solid fa-star" style="color: gold"></i>
         </div>
-        <div class="testimonial-card">
+        <div class="testimonial-card reveal">
           <img src="{% static 'core/img/image2.png' %}" alt="Testimony 2" />
           <h3>John Smith</h3>
           <p>
@@ -128,7 +158,7 @@
           <i class="fa-solid fa-star" style="color: gold"></i>
           <i class="fa-solid fa-star-half-stroke"></i>
         </div>
-        <div class="testimonial-card">
+        <div class="testimonial-card reveal">
           <img src="{% static 'core/img/image3.png' %}" alt="Testimony 1" />
           <h3>John Smith</h3>
           <p>
@@ -144,21 +174,73 @@
       </div>
     </section>
 
-    <section class="call-to-action-section">
-      <div class="call-to-action-container">
-        <h3>Ready to start your Hostel journey with us?</h3>
-        <p>Book a room now</p>
-        <button class="cta-btn">
-          <a href="{% url 'signup' %}">Get started</a>
-        </button>
+    <!-- FAQ -->
+    <section id="faq" class="faq-section reveal">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question">
+            How do I book a room?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Select a room from your dashboard and click the book button.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Can I book more than one room?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>No. You can only have one active booking at a time.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            What happens if a room is full?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>You will not be able to book it once capacity is reached.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            What does "pending" mean?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Your booking is awaiting admin approval.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="newsletter-section">
+    <!-- Call to action section -->
+    <section class="call-to-action-section reveal">
+      <div class="call-to-action-container">
+        <div class="cta-info">
+          <h3>Ready to Get Started?</h3>
+          <p>Secure your room before it's gone</p>
+        </div>
+        <a href="{% url 'signup' %}" class="cta-btn"> Book a room </a>
+      </div>
+    </section>
+
+    <!-- Newsletter section -->
+    <section class="newsletter-section reveal">
       <div class="newsletter-container">
-        <p>Subscribe to get our latest info</p>
+        <div class="newsletter-info">
+          <p>Subscribe to get our latest info</p>
+          <p>Get info about what time the room is open</p>
+        </div>
         <form>
-          <input type="email" />
+          <input type="email" placeholder="Your Email Address" />
           <button>Subscribe</button>
         </form>
       </div>
@@ -234,6 +316,43 @@
         // Initialize
         goToSlide(0);
         startSlider();
+
+        //Pop up
+        setTimeout(() => {
+          document.querySelectorAll(".popup").forEach((el) => {
+            el.style.display = "none";
+          });
+        }, 3000);
+
+        //FAQ
+        const faqQuestions = document.querySelectorAll(".faq-question");
+
+        faqQuestions.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const answer = btn.nextElementSibling;
+
+            answer.classList.toggle("open");
+            btn.classList.toggle("active");
+          });
+        });
+
+        // Reveal
+        const reveals = document.querySelectorAll(".reveal");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+              }
+            });
+          },
+          {
+            threshold: 0.2,
+          },
+        );
+
+        reveals.forEach((el) => observer.observe(el));
       });
     </script>
   </body>

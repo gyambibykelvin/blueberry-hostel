@@ -4,7 +4,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BlueBerry Hostel | Dashboard</title>
+    <meta name="description" content="Developer - Kelvin Anane Gyambiby" />
+    <title>BlueBerry Hostel - Dashboard</title>
     <link rel="stylesheet" href="{% static 'core/dashboard.css' %}" />
     <link
       rel="stylesheet"
@@ -12,6 +13,17 @@
     />
   </head>
   <body>
+    <!-- login message -->
+      {% if message %}
+      <div>{{ message }}</div>
+      {% endif %}
+
+        {% for message in messages %}
+        <div class="popup {{ message.tags }}">
+          {{ message }}
+        </div> 
+        {% endfor %}
+
     <header>
       <div class="hero">
         <img
@@ -23,34 +35,41 @@
       </div>
 
       <div class="navbar">
-        Welcome {{ request.user.first_name }}
+       <!--  Welcome {{ request.user.first_name }} -->
+        <i class="fa-solid fa-circle-user"></i>
+        <i class="fa-solid fa-bell"></i>
         <div class="logout">
-          <i class="fa-solid fa-sign-out"></i>
-          <a href="{% url 'logout' %}">Logout</a>
+         
+          <a href="{% url 'logout' %}"> <i class="fa-solid fa-sign-out"></i></a>
         </div>
       </div>
     </header>
 
     <!-- Card container -->
-    <section class="card-container">
+    <section class="card-container reveal">
       <div class="cards">
         <div class="card">
+          <i class="fa-solid fa-bed"></i>
           <h3>Available Room</h3>
           <p>{{ available_rooms }}</p>
         </div>
         <div class="card">
+          <i class="fa-solid fa-book"></i>
           <h3>Total Bookings</h3>
           <p>{{ total_bookings }}</p>
         </div>
         <div class="card">
+          <i class="fa-solid fa-hourglass-half"></i>
           <h3>Pending</h3>
           <p>{{ pending }}</p>
         </div>
         <div class="card">
+          <i class="fa-solid fa-circle-check"></i>
           <h3>Approved</h3>
           <p>{{ approved }}</p>
         </div>
         <div class="card">
+          <i class="fa-solid fa-circle-xmark"></i>
           <h3>Rejected</h3>
           <p>{{ rejected }}</p>
         </div>
@@ -58,8 +77,8 @@
     </section>
 
       <!-- RECENT BOOKING -->
-      <div class="recent-section">
-        <h3>Recent Booking</h3>
+      <div class="recent-section reveal">
+        <h3><i class="fa-solid fa-clock-rotate-left"></i> Recent Booking</h3>
 
         {% if recent_booking %}
         <p>Room: {{ recent_booking.room.room_number }}</p>
@@ -70,8 +89,8 @@
       </div>
 
       <!-- AVAILABLE ROOMS -->
-      <div class="available-section">
-        <h3>Available Rooms</h3>
+      <div class="available-section reveal">
+        <h3><i class="fa-solid fa-door-open"></i> Available Rooms</h3>
         <table>
           <tr>
             <th>Room</th>
@@ -89,7 +108,7 @@
                   name="room_number"
                   value="{{ room.room_number }}"
                 />
-                <button class="btn">Book</button>
+                <button class="btn"> <i class="fa-solid fa-plus"></i>Book</button>
               </form>
             </td>
           </tr>
@@ -98,8 +117,8 @@
       </div>
 
       <!-- BOOKING HISTORY -->
-      <div class="booking-section">
-        <h3>Booking History</h3>
+      <div class="booking-section reveal">
+        <h3><i class="fa-solid fa-list"></i>Booking History</h3>
         <table>
           <tr>
             <th>Room</th>
@@ -114,7 +133,7 @@
             <td>
               {% if booking.status == 'pending' %}
               <a href="{% url 'cancel_booking' booking.id %}">
-                <button class="btn">Cancel</button>
+                <button class="btn"> <i class="fa-solid fa-xmark"></i> Cancel</button>
               </a>
               {% endif %}
             </td>
@@ -126,6 +145,7 @@
 
   <!-- Footer -->
       <footer>
+        <div class="footer-container">
       <div class="social-media-links">
         <a href="#"><i class="fab fa-facebook-f"></i></a>
         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -135,6 +155,33 @@
       &copy; {{ datetime }} BlueBerry Hostel
 
       <div class="sponsor">Best Brain College</div>
+    </div>
     </footer>
+    <!-- Javascripts -->
+    <script>
+      setTimeout(()=>{
+        document.querySelectorAll('.popup').forEach(el => {
+          el.style.display='none';
+        });
+      }, 3000);
+
+       // Reveal
+      const reveals = document.querySelectorAll(".reveal");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+            }
+          });
+        },
+        {
+          threshold: 0.2,
+        },
+      );
+
+      reveals.forEach((el) => observer.observe(el));
+    </script>
   </body>
 </html>

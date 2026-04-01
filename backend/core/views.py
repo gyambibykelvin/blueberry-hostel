@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 #just for the demo
-from django.http import HttpResponse
+from django.db.models import Count
 from .models import  CustomUser, MainUser, Booking, Room
 from django.contrib.auth import login, authenticate, logout
 
 from django.contrib.auth.decorators import login_required
 import datetime
+from django.contrib import messages
 
 # Create your views here.
 
@@ -26,10 +27,12 @@ def login_view(request):
 
         if user is not None:
            login(request, user)
+           messages.success(request, "You have successfully login!")
            return redirect('dashboard')
     
         else:
-            return render(request, 'core/login.html', {'error': "Invalid Credential"}) 
+            messages.error(request, 'Invalid Credential')
+            return redirect('login') 
 
     return render(request, 'core/login.html')
 
@@ -69,15 +72,21 @@ def signup_view(request):
             phone_number=phone_number
         )
 
+        messages.success(request, "Account has been successfully created! Login to continue")
+        return redirect('login')
+
         return redirect("login")  # Redirect to login page after successful signup
     return render(request, 'core/signup.html')
 
 #logout view
 def logout_view(request):
     logout(request)
+    messages.info(request,"You have been logout! Please login to continue")
     return redirect('landing_page')
 
 #booking view
+from django.contrib import messages
+
 @login_required
 def booking_view(request):
     user = request.user
@@ -86,19 +95,35 @@ def booking_view(request):
         room_number = request.POST.get('room_number')
         room = Room.objects.get(room_number=room_number)
 
-        # VALIDATION: gender check BEFORE booking
-        if room.gender != user.profile.gender:
-            return render(request, 'core/dashboard.html', {
-                'error': "Room not suitable for your gender"
-            })
+        #Prevent duplicate booking
+        if Booking.objects.filter(user=user, room=room, status='pending').exists():
+            messages.error(request, "You already booked this room and it is on pending")
+            return redirect('dashboard')
+        
+        #capacity check
+        #count current active bookings
+        current_count = Booking.objects.filter(
+            room=room,
+            status__in = ['pending', 'approved']
+        ).count()
 
+        if current_count >= room.capacity:
+            messages.error(request, "Room is almost full")
+            return redirect('dashboard')
+
+        #Gender validation
+        if room.gender != user.profile.gender:
+            messages.error(request, "Room not suitable for your gender.")
+            return redirect('dashboard')
+
+        #Create booking
         Booking.objects.create(
             user=user,
             room=room,
-            date_booked=datetime.datetime.now(),
             status='pending'
         )
 
+        messages.success(request, "Booking submitted successfully.")
         return redirect('dashboard')
 
     return redirect('dashboard')
@@ -114,13 +139,16 @@ def dashboard_view(request):
     #Recent booking (latest)
     recent_booking = bookings.first()
 
+ #   #Get rooms already booked by this user
+    booked_rooms = Booking.objects.filter(
+        user=user,
+        status='pending'
+    ).values_list('room_id', flat=True)
+
     #Filter rooms by gender (CRITICAL UX FIX) #will be right back
     user_gender = request.user.profile.gender
     rooms = Room.objects.filter(gender=user_gender)
 
-
-    """  user_gender = user.profile.gender
-    rooms = Room.objects.filter(gender=user_gender) """
 
     #Stats
     total_bookings = bookings.count()
@@ -150,6 +178,7 @@ def cancel_booking_view(request, booking_id):
     booking = Booking.objects.get(id=booking_id)
     if booking.user == request.user:
         booking.delete()
+    messages.info(request, "Room request has been cancelled!")    
     return redirect('dashboard')
 
 @login_required
