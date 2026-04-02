@@ -115,6 +115,14 @@ def booking_view(request):
         if room.gender != user.profile.gender:
             messages.error(request, "Room not suitable for your gender.")
             return redirect('dashboard')
+        
+        #Restrict user to one active booking
+        if Booking.objects.filter(
+           user=user,
+           status__in=['pending', 'approved']
+        ).exists():
+          messages.error(request, "You already have an active booking.")
+          return redirect('dashboard')
 
         #Create booking
         Booking.objects.create(
@@ -148,7 +156,6 @@ def dashboard_view(request):
     #Filter rooms by gender (CRITICAL UX FIX) #will be right back
     user_gender = request.user.profile.gender
     rooms = Room.objects.filter(gender=user_gender)
-
 
     #Stats
     total_bookings = bookings.count()

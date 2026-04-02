@@ -111,7 +111,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
@@ -122,3 +121,10 @@ AUTH_USER_MODEL = 'core.CustomUser'
 
 #redirect back when user escape the normal flow
 login_URL = 'login'
+
+#Email backend for development
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#Email settings for production (configure with actual email service)
+EMAIL_HOST_USER = 'noreply@blueberry.com'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
