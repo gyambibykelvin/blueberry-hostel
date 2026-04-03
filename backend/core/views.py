@@ -192,3 +192,54 @@ def cancel_booking_view(request, booking_id):
 def room_view(request):
     rooms = Room.objects.all()
     return render(request, 'core/rooms.html', {'rooms': rooms})
+
+@login_required
+def profile_view(request):
+    user = request.user
+    profile = user.profile  # or user.profile
+
+    if request.method == "POST":
+        username = request.POST.get("username")
+        first_name = request.POST.get("first_name")
+        phone_number = request.POST.get("phone_number")
+
+        #profile settings
+        profile_picture = request.FILES.get("profile_pictures")
+        if profile_picture:
+            profile.profile_picture=profile_picture
+            # profile.save()
+
+        #Phone number must be numbers
+        if not phone_number.isdigit():
+         messages.error(request, "Phone must be numeric.")
+
+        #Phone number can't be empty
+        if phone_number == '':
+            messages.error(request, "Phone number can't be empty")
+            return redirect('profile')
+
+        #Username can't be empty
+        if not username:
+         messages.error(request, "Username cannot be empty.")
+
+        #VALIDATION
+        if CustomUser.objects.exclude(id=user.id).filter(username=username).exists():
+            messages.error(request, "Username already taken.")
+            return redirect('profile')
+
+        #Update User
+        user.username = username
+        user.first_name = first_name
+        user.save()
+
+        #Update Profile
+        profile.phone_number = phone_number
+        profile.save()
+
+        messages.success(request, "Profile updated successfully.")
+        return redirect('profile')
+
+    return render(request, 'core/profile.html', {
+        'user': user,
+        'profile': profile
+    })

@@ -11,7 +11,7 @@ urlpatterns = [
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('booking', views.booking_view, name='booking'),
     path('<int:booking_id>', views.cancel_booking_view, name='cancel_booking'),
-
+    path('profile/', views.profile_view, name='profile'),
 
     
     # Password Reset

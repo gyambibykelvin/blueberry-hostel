@@ -123,8 +123,20 @@ AUTH_USER_MODEL = 'core.CustomUser'
 login_URL = 'login'
 
 #Email backend for development
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 #Email settings for production (configure with actual email service)
-EMAIL_HOST_USER = 'noreply@blueberry.com'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST ='smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'kellynane001@gmail.com'
+EMAIL_HOST_PASSWORD = 'bqqmbkqcrkpzatmp'
+DEFAULT_FROM_EMAIL = 'BlueBerry <noreply@blueberry.com>'
+
+# For password reset emails
+SERVER_EMAIL = EMAIL_HOST_USER
+PASSWORD_RESET_TIMEOUT = 3600  # 1 hour in seconds
+
+#Image upload config settings
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

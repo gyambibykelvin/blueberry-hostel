@@ -35,8 +35,8 @@
       </div>
 
       <div class="navbar">
-       <!--  Welcome {{ request.user.first_name }} -->
-        <i class="fa-solid fa-circle-user"></i>
+        Welcome {{ request.user.first_name }} 
+       <a href="{% url 'profile' %}" style="color: white;"> <i class="fa-solid fa-circle-user"></i></a>
         <i class="fa-solid fa-bell"></i>
         <div class="logout">
          

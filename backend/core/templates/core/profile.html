@@ -1,0 +1,110 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'core/profile.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+    <title>BlueBerry Hostel - Profile</title>
+  </head>
+  <body>
+    {% for message in messages %}
+    <div class="popup {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+
+    <header>
+      <div class="hero">
+        <img
+          src="{% static 'core/img/blueberry_logo.jpg' %}"
+          alt="BlueBerry Hostel Logo"
+          class="logo"
+        />
+        <p>BlueBerry</p>
+      </div>
+
+      <div class="navbar">
+        <a href="{% url 'dashboard' %}" style="color: white">
+          <i class="fa-solid fa-house"></i>
+        </a>
+        <div class="logout">
+          <a href="{% url 'logout' %}"> <i class="fa-solid fa-sign-out"></i></a>
+        </div>
+      </div>
+    </header>
+
+    <section class="profile-section">
+      <div class="profile-container">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <div class="profile-img">
+            {% if profile.profile_picture %}
+            <img id="preview" src="{{ profile.profile_picture.url }}" />
+            {% else %}
+            <img src="/media/profile_pics/default.png" />
+            {% endif %}
+            <input
+              type="file"
+              name="profile_pictures"
+              onchange="previewImage(event)"
+              class="profile-input"
+            />
+          </div>
+
+          <h2><i class="fa-solid fa-user"></i>Personal Information</h2>
+          <label for="username">Username</label>
+          <input type="text" name="username" value="{{ user.username }}" />
+
+          <label for="full name">Full Name</label>
+          <input type="text" name="first_name" value="{{ user.first_name }}" />
+
+          <label for="phone number">Phone</label>
+          <input
+            type="number"
+            name="phone_number"
+            value="{{ profile.phone_number }}"
+          />
+
+          <button type="submit">
+            <i class="fa-solid fa-save"></i> Save Changes
+          </button>
+        </form>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="social-media-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+
+        &copy; {{ datetime }} BlueBerry Hostel
+
+        <div class="sponsor">Best Brain College</div>
+      </div>
+    </footer>
+    <!-- Javascript -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Pop up
+        setTimeout(() => {
+          document.querySelectorAll(".popup").forEach((el) => {
+            el.style.display = "none";
+          });
+        }, 3000);
+
+        //Profile preview
+        function previewImage(event) {
+          const img = document.getElementById("preview");
+          img.src = URL.createObjectURL(event.target.files[0]);
+        }
+      });
+    </script>
+  </body>
+</html>

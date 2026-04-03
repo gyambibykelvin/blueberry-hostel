@@ -23,9 +23,10 @@ class MainUser(models.Model):
    last_name = models.CharField(max_length=50)
    gender = models.CharField(max_length=10, choices=[('male','Male'), ('female','Female')])
    phone_number = models.IntegerField()
+   profile_picture = models.ImageField(upload_to='profile_pics/', default='profile_pics/default.png', blank=True, null=True)
 
    def __str__(self):
-       return f"{self.first_name} {self.last_name} - {self.phone_number}"
+       return f"{self.first_name} {self.last_name} - {self.phone_number} - {self.profile_picture}"
 
 
 #model for room
