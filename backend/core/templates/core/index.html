@@ -44,7 +44,11 @@
       <div class="slider">
         <div class="slides">
           <div class="slide">
-            <img src="{% static 'core/img/two_beds.jpg' %}" alt="slide 1" />
+            <img
+              loading="lazy"
+              src="{% static 'core/img/two_beds.jpg' %}"
+              alt="slide 1"
+            />
             <div class="overlay">
               <h1>Find and Book Your Hostel Room in Minutes</h1>
               <p>No stress. No confusion. Just simple booking.</p>
@@ -53,7 +57,11 @@
           </div>
 
           <div class="slide">
-            <img src="{% static 'core/img/nice_view.jpg' %}" alt="slide 2" />
+            <img
+              loading="lazy"
+              src="{% static 'core/img/nice_view.jpg' %}"
+              alt="slide 2"
+            />
             <div class="overlay">
               <h1>Beautiful Environment</h1>
               <p>Enjoy a peaceful and inspiring view</p>
@@ -62,7 +70,11 @@
           </div>
 
           <div class="slide">
-            <img src="{% static 'core/img/double_bed.jpg' %}" alt="slide 3" />
+            <img
+              loading="lazy"
+              src="{% static 'core/img/double_bed.jpg' %}"
+              alt="slide 3"
+            />
             <div class="overlay">
               <h1>Modern Facilities</h1>
               <p>Everything you need in one place</p>
@@ -135,7 +147,11 @@
       <h2>Testimonials</h2>
       <div class="testimonial-container">
         <div class="testimonial-card reveal">
-          <img src="{% static 'core/img/image1.png' %}" alt="Testimony 1" />
+          <img
+            loading="lazy"
+            src="{% static 'core/img/image1.png' %}"
+            alt="Testimony 1"
+          />
           <h3>John Smith</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
@@ -147,7 +163,11 @@
           <i class="fa-solid fa-star" style="color: gold"></i>
         </div>
         <div class="testimonial-card reveal">
-          <img src="{% static 'core/img/image2.png' %}" alt="Testimony 2" />
+          <img
+            loading="lazy"
+            src="{% static 'core/img/image2.png' %}"
+            alt="Testimony 2"
+          />
           <h3>John Smith</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
@@ -159,7 +179,11 @@
           <i class="fa-solid fa-star-half-stroke"></i>
         </div>
         <div class="testimonial-card reveal">
-          <img src="{% static 'core/img/image3.png' %}" alt="Testimony 1" />
+          <img
+            loading="lazy"
+            src="{% static 'core/img/image3.png' %}"
+            alt="Testimony 1"
+          />
           <h3>John Smith</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
@@ -322,7 +346,7 @@
           document.querySelectorAll(".popup").forEach((el) => {
             el.style.display = "none";
           });
-        }, 3000);
+        }, 5000);
 
         //FAQ
         const faqQuestions = document.querySelectorAll(".faq-question");

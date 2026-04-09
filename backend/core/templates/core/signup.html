@@ -14,10 +14,18 @@
     <title>BlueBerry Hostel | Sign up</title>
   </head>
   <body>
+    {% for message in messages %}
+    <div class="popup {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+
     <section class="login-section reveal">
       <div class="login-container">
         <div class="left-side">
-          <img src="{% static 'core/img/Bunk Bed.jpg'%}" alt="Bunk Bed" />
+          <img
+            loading="lazy"
+            src="{% static 'core/img/Bunk Bed.jpg'%}"
+            alt="Bunk Bed"
+          />
         </div>
 
         <div class="right-side">
@@ -85,6 +93,13 @@
     </section>
     <!-- Javascripts -->
     <script>
+      //Pop feedback
+      setTimeout(() => {
+        document.querySelectorAll(".popup").forEach((el) => {
+          el.style.display = "none";
+        });
+      }, 5000);
+
       document.addEventListener("DOMContentLoaded", function () {
         // Reveal
         const reveals = document.querySelectorAll(".reveal");

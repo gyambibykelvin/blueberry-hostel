@@ -45,7 +45,11 @@
 
           <div class="profile-img">
             {% if profile.profile_picture %}
-            <img id="preview" src="{{ profile.profile_picture.url }}" />
+            <img
+              loading="lazy"
+              id="preview"
+              src="{{ profile.profile_picture.url }}"
+            />
             {% else %}
             <img src="/media/profile_pics/default.png" />
             {% endif %}
@@ -99,7 +103,7 @@
           document.querySelectorAll(".popup").forEach((el) => {
             el.style.display = "none";
           });
-        }, 3000);
+        }, 5000);
 
         //Profile preview
         function previewImage(event) {

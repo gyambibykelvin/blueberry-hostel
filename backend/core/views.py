@@ -22,8 +22,6 @@ def login_view(request):
     
         user = authenticate(request, username=username, password=password)
 
-        print(request.POST)
-
         if user is not None:
            login(request, user)
            messages.success(request, "You have successfully login!")
@@ -47,10 +45,16 @@ def signup_view(request):
         phone_number = request.POST.get("phone_number")
    #     role = request.POST.get("role", "user") #default to 'user'
 
-        print(request.POST)
+        #Username taken
+        if CustomUser.objects.filter(username=username).exists():
+          messages.error(request, "Username already exists")
+          return redirect('signup')
+        
+        #Email taken
+        if CustomUser.objects.filter(email=email).exists():
+            messages.error(request, "Email Taken")
+            return redirect('signup')
 
-        if MainUser.objects.filter(username=username).exists():
-          return render(request, 'core/signup.html', {'error': "Username already exists"})
 
         #create customerUser
         new_user = CustomUser.objects.create_user(

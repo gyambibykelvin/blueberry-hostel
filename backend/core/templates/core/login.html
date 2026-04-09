@@ -22,7 +22,11 @@
     <section class="login-section reveal">
       <div class="login-container">
         <div class="left-side">
-          <img src="{% static 'core/img/Bunk Bed.jpg'%}" alt="Bunk Bed" />
+          <img
+            loading="lazy"
+            src="{% static 'core/img/Bunk Bed.jpg'%}"
+            alt="Bunk Bed"
+          />
         </div>
 
         <div class="right-side">
@@ -64,7 +68,7 @@
         document.querySelectorAll(".popup").forEach((el) => {
           el.style.display = "none";
         });
-      }, 3000);
+      }, 5000);
 
       // Reveal
       const reveals = document.querySelectorAll(".reveal");
