@@ -4,8 +4,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Developer - Kelvin Anane Gyambiby" />
+    <meta name="author" content="Developer - Kelvin Anane Gyambiby" />
     <title>BlueBerry Hostel - Dashboard</title>
+    <link rel="icon" href="{% static 'core/img/blueberry_logo.png' %}">
     <link rel="stylesheet" href="{% static 'core/dashboard.css' %}" />
     <link
       rel="stylesheet"
@@ -35,7 +36,7 @@
       </div>
 
       <div class="navbar">
-        Welcome {{ request.user.first_name }} 
+        <span> Welcome, {{ request.user.first_name }}</span> 
        <a href="{% url 'profile' %}" style="color: white;"> <i class="fa-solid fa-circle-user"></i></a>
         <i class="fa-solid fa-bell"></i>
         <div class="logout">
@@ -91,14 +92,13 @@
 
       <!-- AVAILABLE ROOMS -->
       <div class="available-section reveal">
-        <h3><i class="fa-solid fa-door-open"></i> Available Rooms</h3>
+        <h3><i class="fa-solid fa-door-open" style="color: #ff0000;"></i> Available Rooms</h3>
         <table>
           <tr>
             <th>Room</th>
             <th>Capacity</th>
             <th>Action</th>
           </tr>
-
           {% for room in rooms %}
           <tr>
             <td>{{ room.room_number }}</td>
@@ -116,13 +116,18 @@
               </form>
             </td>
           </tr>
+          {% empty %}
+          <tr>
+            <td colspan="3" style="text-align: center; padding: 20px;">No available room</td>
+          </tr>
           {% endfor %}
+
         </table>
       </div>
 
       <!-- BOOKING HISTORY -->
       <div class="booking-section reveal">
-        <h3><i class="fa-solid fa-list"></i>Booking History</h3>
+        <h3><i class="fa-solid fa-list" style="color:#337ab7;"></i>Booking History</h3>
         <table>
           <tr>
             <th>Room</th>
@@ -141,6 +146,10 @@
               </a>
               {% endif %}
             </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="3" style="text-align: center; padding: 20px;">No booking history</td>
           </tr>
           {% endfor %}
         </table>

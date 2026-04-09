@@ -6,6 +6,14 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 body {
   background: var(--background-color);
   font-family: "Lora", sans-serif;
@@ -23,6 +31,7 @@ body {
 .login-container {
   display: grid;
   grid-template-columns: 1fr 50%;
+  height: 100%;
 }
 
 .right-side {
@@ -41,10 +50,14 @@ body {
 .right-side form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
   width: 100%;
   max-width: 400px;
   margin-top: 20px;
+}
+
+.right-side label {
+  margin-bottom: -10px;
 }
 
 .right-side form input,
@@ -204,5 +217,11 @@ i {
   .alternate-login button {
     max-width: 500px;
     min-width: 200px;
+  }
+  body {
+    overflow: scroll;
+  }
+  form {
+    margin-left: 10px;
   }
 }

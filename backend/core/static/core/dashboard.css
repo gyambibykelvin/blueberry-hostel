@@ -251,17 +251,24 @@ footer .social-media-links a:hover {
     position: sticky;
     width: 100%;
   }
+  .navbar span {
+    display: none;
+  }
 
-  /*  footer {
-    position: relative;
+  footer {
     width: 100%;
-    padding: 5px;
-  } */
+    position: relative;
+  }
 
   .footer-container {
     display: flex;
     flex-direction: column;
     line-height: 1.6;
+    width: 100%;
+  }
+
+  .booking-section {
+    margin-bottom: 100px;
   }
 }
 

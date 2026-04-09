@@ -4,7 +4,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Developer - Kelvin Anane Gyambiby" />
     <link rel="stylesheet" href="{% static 'core/profile.css' %}" />
+    <link rel="icon" href="{% static 'core/img/blueberry_logo.png' %}" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -55,7 +57,7 @@
             />
           </div>
 
-          <h2><i class="fa-solid fa-user"></i>Personal Information</h2>
+          <h2><i class="fa-solid fa-user"></i>Profile</h2>
           <label for="username">Username</label>
           <input type="text" name="username" value="{{ user.username }}" />
 
@@ -66,7 +68,7 @@
           <input
             type="number"
             name="phone_number"
-            value="{{ profile.phone_number }}"
+            value="0{{ profile.phone_number }}"
           />
 
           <button type="submit">

@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-#just for the demo
 from django.db.models import Count
 from .models import  CustomUser, MainUser, Booking, Room
 from django.contrib.auth import login, authenticate, logout
@@ -50,8 +49,8 @@ def signup_view(request):
 
         print(request.POST)
 
-       # if MainUser.objects.filter(username=username).exists():
-          #  return render(request, 'core/signup.html', {'error': "Username already exists"})
+        if MainUser.objects.filter(username=username).exists():
+          return render(request, 'core/signup.html', {'error': "Username already exists"})
 
         #create customerUser
         new_user = CustomUser.objects.create_user(
@@ -73,9 +72,8 @@ def signup_view(request):
         )
 
         messages.success(request, "Account has been successfully created! Login to continue")
-        return redirect('login')
+        return redirect('login')  # Redirect to login page after successful signup
 
-        return redirect("login")  # Redirect to login page after successful signup
     return render(request, 'core/signup.html')
 
 #logout view
@@ -85,8 +83,6 @@ def logout_view(request):
     return redirect('landing_page')
 
 #booking view
-from django.contrib import messages
-
 @login_required
 def booking_view(request):
     user = request.user

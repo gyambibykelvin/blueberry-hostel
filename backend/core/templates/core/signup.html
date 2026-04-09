@@ -4,9 +4,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Developer - Kelvin Anane Gyambiby" />
-    <link rel="stylesheet" href="{% static 'core/login.css' %}" />
+    <meta name="author" content="Developer - Kelvin Anane Gyambiby" />
     <link rel="stylesheet" href="{% static 'core/signup.css' %}" />
+    <link rel="icon" href="{% static 'core/img/blueberry_logo.png' %}" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -22,21 +22,6 @@
 
         <div class="right-side">
           <h2>Signup</h2>
-
-          <!--  <div class="alternate-login">
-            <button><i class="fab fa-google"></i> Login with Google</button>
-            <button>
-              <i class="fab fa-facebook" style="color: #1877f2"></i> Login with
-              Facebook
-            </button>
-          </div>
-
-          <div class="divider">
-            <span class="first-line"></span>
-            <span class="or">or</span>
-            <span class="second-line"></span>
-          </div> -->
-
           <form method="POST" action="">
             {% csrf_token %}
             <label for="usernamee">Username</label>
