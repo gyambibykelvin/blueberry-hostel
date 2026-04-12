@@ -166,8 +166,10 @@ input[type="number"] {
 }
 
 .navbar i {
-  font-size: 20px;
   gap: 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 20px;
 }
 
 /* Footer */

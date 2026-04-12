@@ -204,10 +204,10 @@ def profile_view(request):
         phone_number = request.POST.get("phone_number")
 
         #profile settings
-        profile_picture = request.FILES.get("profile_pictures")
+        profile_picture = request.FILES.get("profile_picture")
         if profile_picture:
-            profile.profile_picture=profile_picture
-            # profile.save()
+            profile.profile_picture = profile_picture
+            profile.save()
 
         #Phone number must be numbers
         if not phone_number.isdigit():

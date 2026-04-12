@@ -1,0 +1,2 @@
+#Environment variables should not be committed to version control for security reasons. This .gitignore file ensures that the .env file, which contains sensitive information such as API keys and database credentials, is not tracked by Git.
+.env
