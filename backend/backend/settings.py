@@ -26,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8!sr4+_9dtbabwtprurujnxb(&=pb8=7pypaoghj=6%4t5!evc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []#'blueberry-hostel.onrender.com']
+ALLOWED_HOSTS = ['blueberry-hostel.onrender.com']
 
 
 # Application definition
