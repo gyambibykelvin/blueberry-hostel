@@ -11,7 +11,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     />
-    <title>BlueBerry Hostel | Sign up</title>
+    <title>BlueBerry Hostel - Sign up</title>
   </head>
   <body>
     {% for message in messages %}
@@ -30,7 +30,7 @@
 
         <div class="right-side">
           <h2>Signup</h2>
-          <form method="POST" action="">
+          <form method="POST" onsubmit="handleSubmit(this)">
             {% csrf_token %}
             <label for="usernamee">Username</label>
             <input type="text" id="username" name="username" required />
@@ -81,6 +81,7 @@
             <button type="submit">
               <i class="fa-solid fa-user-plus"></i>Signup
             </button>
+            <span id="loading" style="display: none">signing up...</span>
           </form>
 
           <div class="signup-link">
@@ -118,6 +119,13 @@
         );
 
         reveals.forEach((el) => observer.observe(el));
+
+        // Show loading on form submit
+        function handleSubmit(form) {
+          const btn = form.querySelector("button");
+          btn.disabled = true;
+          btn.innerText = "Signing up...";
+        }
       });
     </script>
   </body>

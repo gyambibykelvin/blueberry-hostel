@@ -51,11 +51,15 @@
               src="{{ profile.profile_picture.url }}"
             />
             {% else %}
-            <img src="/media/profile_pics/default.png" />
+            <img
+              loading="lazy"
+              id="preview"
+              src="{% static 'core/img/blank_profile_picture.jpg' %}"
+            />
             {% endif %}
             <input
               type="file"
-              name="profile_pictures"
+              name="profile_picture"
               onchange="previewImage(event)"
               class="profile-input"
             />

@@ -39,7 +39,7 @@
             <span class="second-line"></span>
           </div>  -->
 
-          <form method="POST" action="">
+          <form method="POST" onsubmit="handleSubmit(this)">
             {% csrf_token %}
             <label for="usernamee">Username</label>
             <input type="text" id="username" name="username" required />
@@ -48,6 +48,7 @@
             <button type="submit">
               <i class="fa-solid fa-sign-in"></i>Login
             </button>
+            <span id="loading" style="display: none">Logging in...</span>
           </form>
 
           <div class="signup-link">
@@ -87,6 +88,13 @@
       );
 
       reveals.forEach((el) => observer.observe(el));
+
+      // Show loading on form submit
+      function handleSubmit(form) {
+        const btn = form.querySelector("button");
+        btn.disabled = true;
+        btn.innerText = "Logging in...";
+      }
     </script>
   </body>
 </html>

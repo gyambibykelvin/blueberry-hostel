@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8!sr4+_9dtbabwtprurujnxb(&=pb8=7pypaoghj=6%4t5!evc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['blueberry-hostel.onrender.com']
 
@@ -38,7 +38,25 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+
+    #cloudinary
+    'cloudinary',
+    'cloudinary_storage',
 ]
+#cloudinary settings
+import os
+import cloudinary
+
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+    secure=True
+)
+# Use Cloudinary for media storage
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
 
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -143,5 +161,5 @@ SERVER_EMAIL = EMAIL_HOST_USER
 PASSWORD_RESET_TIMEOUT = 3600  # 1 hour in seconds
 
 #Image upload config settings
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+""" MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media' """
