@@ -20,7 +20,7 @@ def login_view(request):
         email = request.POST.get("email")
         password = request.POST.get("password")
     
-        user = authenticate(request, email=username, password=password)
+        user = authenticate(request, email=email, password=password)
 
         if user is not None:
            login(request, user)
