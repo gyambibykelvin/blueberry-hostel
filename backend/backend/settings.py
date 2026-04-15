@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 import os
 from pathlib import Path
-
+try:
 from dotenv import load_dotenv
 load_dotenv()   # This loads the .env file
+except ImportError:
+    pass
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,6 +55,15 @@ CLOUDINARY_STORAGE = {
     'SECURE': True,                 
     'MEDIA_TAG': 'media',
 }
+
+import cloudinary
+
+cloudinary.config(
+    cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.environ.get('CLOUDINARY_API_KEY'),
+    api_secret=os.environ.get('CLOUDINARY_API_SECRET'),
+    secure=True,
+)
 
 # Use Cloudinary for media storage
 STORAGES = {
