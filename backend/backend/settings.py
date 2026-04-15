@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 from pathlib import Path
 try:
-from dotenv import load_dotenv
-load_dotenv()   # This loads the .env file
+    from dotenv import load_dotenv
+    load_dotenv()   # This loads the .env file
 except ImportError:
     pass
 
