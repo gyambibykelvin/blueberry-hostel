@@ -17,10 +17,10 @@ def landing_page(request):
 #login view
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST.get("username")
+        email = request.POST.get("email")
         password = request.POST.get("password")
     
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, email=username, password=password)
 
         if user is not None:
            login(request, user)
@@ -36,7 +36,6 @@ def login_view(request):
 #sign up view
 def signup_view(request):
     if request.method == 'POST':
-        username = request.POST.get("username")
         password = request.POST.get("password")
         first_name = request.POST.get("first_name")
         last_name = request.POST.get("last_name")
@@ -44,11 +43,6 @@ def signup_view(request):
         gender = request.POST.get("gender")
         phone_number = request.POST.get("phone_number")
    #     role = request.POST.get("role", "user") #default to 'user'
-
-        #Username taken
-        if CustomUser.objects.filter(username=username).exists():
-          messages.error(request, "Username already exists")
-          return redirect('signup')
         
         #Email taken
         if CustomUser.objects.filter(email=email).exists():
@@ -58,7 +52,6 @@ def signup_view(request):
 
         #create customerUser
         new_user = CustomUser.objects.create_user(
-        username=username,
         password=password,
         first_name=first_name,
         last_name=last_name,
