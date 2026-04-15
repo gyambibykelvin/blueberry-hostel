@@ -279,4 +279,12 @@ footer .social-media-links a:hover {
     grid-template-columns: repeat(1, 1fr);
     gap: 10px;
   }
+  .recent-section,
+  .available-section,
+  .booking-section {
+    margin-top: 30px;
+    margin-left: 20px;
+    margin-bottom: 100px;
+    margin-right: 20px;
+  }
 }
