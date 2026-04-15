@@ -11,37 +11,50 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 import os
 from pathlib import Path
+import cloudinary
+
+# Safe dotenv for local only
 try:
     from dotenv import load_dotenv
-    load_dotenv()   # This loads the .env file
+    load_dotenv()
 except ImportError:
     pass
 
-import cloudinary
+# FORCE CLOUDINARY CONFIG USING CLOUDINARY_URL 
+CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
 
-cloudinary.config(
-    cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
-    api_key=os.environ.get('CLOUDINARY_API_KEY'),
-    api_secret=os.environ.get('CLOUDINARY_API_SECRET'),
-    secure=True,
-)
+if CLOUDINARY_URL:
+    cloudinary.config(
+        cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
+        api_key=os.environ.get('CLOUDINARY_API_KEY'),
+        api_secret=os.environ.get('CLOUDINARY_API_SECRET'),
+        secure=True,
+    )
+else:
+    # Fallback if single URL is not set
+    cloudinary.config(
+        cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
+        api_key=os.environ.get('CLOUDINARY_API_KEY'),
+        api_secret=os.environ.get('CLOUDINARY_API_SECRET'),
+        secure=True,
+    )
 
-#cloudinary settings
+# CLOUDINARY_STORAGE for django-cloudinary-storage
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
     'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
-    'SECURE': True,                 
+    'SECURE': True,
     'MEDIA_TAG': 'media',
 }
 
-# Use Cloudinary for media storage
+# STORAGES (keep this exactly as you have it)
 STORAGES = {
     'default': {
         'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage',
     },
     'staticfiles': {
-        'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage', 
+        'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
     },
 }
 
