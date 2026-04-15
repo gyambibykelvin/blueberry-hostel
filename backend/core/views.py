@@ -36,10 +36,10 @@ def login_view(request):
 #sign up view
 def signup_view(request):
     if request.method == 'POST':
-        password = request.POST.get("password")
         first_name = request.POST.get("first_name")
         last_name = request.POST.get("last_name")
         email = request.POST.get("email")
+        password = request.POST.get("password")
         gender = request.POST.get("gender")
         phone_number = request.POST.get("phone_number")
    #     role = request.POST.get("role", "user") #default to 'user'
@@ -49,13 +49,12 @@ def signup_view(request):
             messages.error(request, "Email Taken")
             return redirect('signup')
 
-
         #create customerUser
         new_user = CustomUser.objects.create_user(
-        password=password,
         first_name=first_name,
         last_name=last_name,
-        email=email
+        email=email,
+        password=password
      #   role=role
             )
 
