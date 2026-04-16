@@ -398,6 +398,7 @@ footer .social-media-links a:hover{
     margin-left: 5px;
     border-radius: 5px;
     outline: none;
+    border-radius: 15px;
 }
 
 /* popup message */
