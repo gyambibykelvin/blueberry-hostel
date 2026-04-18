@@ -55,7 +55,7 @@ header .hero {
   justify-content: center;
   align-items: center;
   /* height: 100vh; */
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .profile-container {
   display: flex;
@@ -86,7 +86,7 @@ img {
 input[type="file"] {
   appearance: none;
   -webkit-appearance: none;
-  width: 50px;
+  width: 65px;
   height: 50px;
   border-radius: 50%;
   background-color: #007bff;

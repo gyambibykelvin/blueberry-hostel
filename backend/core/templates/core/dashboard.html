@@ -52,27 +52,48 @@
         <div class="card">
           <i class="fa-solid fa-bed"></i>
           <h3>Available Room</h3>
+          {% if available_rooms %}
           <p>{{ available_rooms }}</p>
+          {% else %}
+          <p style="opacity: 0.7;">No available rooms</p>
+          {% endif %}
         </div>
         <div class="card">
           <i class="fa-solid fa-book"></i>
           <h3>Total Bookings</h3>
+          {% if total_bookings %}
           <p>{{ total_bookings }}</p>
+          {% else %}
+          <p style="opacity: 0.7;">No bookings found</p>
+          {% endif %}
         </div>
         <div class="card">
           <i class="fa-solid fa-hourglass-half"></i>
           <h3>Pending</h3>
+          {% if pending %}
           <p>{{ pending }}</p>
+          {% else %}
+          <p style="opacity: 0.7;">No pending bookings</p>
+          {% endif %}
         </div>
         <div class="card">
           <i class="fa-solid fa-circle-check"></i>
           <h3>Approved</h3>
+          {% if approved %}
           <p>{{ approved }}</p>
+          {% else %}
+          <p style="opacity: 0.7;">No approved bookings</p>
+          {% endif %}
+
         </div>
         <div class="card">
           <i class="fa-solid fa-circle-xmark"></i>
           <h3>Rejected</h3>
+          {% if rejected %}
           <p>{{ rejected }}</p>
+          {% else %}
+          <p style="opacity: 0.7;">No rejected bookings</p>
+          {% endif %}
         </div>
       </div>
     </section>
