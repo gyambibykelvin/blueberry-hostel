@@ -47,7 +47,7 @@ def signup_view(request):
 
         #username taken
         if CustomUser.objects.filter(username=username).exists():
-            message.error(request, "Username exists")
+            messages.error(request, "Username exists")
             return redirect('signup')
         
         #Email taken
